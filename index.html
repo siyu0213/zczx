@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中铁建设集团总承包公司招采中心 - 官网</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'crcc-blue': '#00599a', // 官网深蓝色
+                        'crcc-red': '#E60012',
+                        'crcc-gray': '#333333',
+                        'crcc-light-gray': '#F3F4F6'
+                    },
+                    fontFamily: {
+                        'sans': ['"Microsoft YaHei"', 'SimHei', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: #E60012;
+            margin-top: 10px;
+        }
+        .nav-link {
+            transition: all 0.2s ease;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        .nav-link:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        /* 实施细则蛇形流程图 (Snake Flow) */
+        .implementation-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-areas: 
+                "s1 s2 s3"
+                "s6 s5 s4"
+                "s7 s8 s9";
+            gap: 30px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .flow-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-top: 4px solid #00599a;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100px;
+        }
+        .s1 { grid-area: s1; }
+        .s2 { grid-area: s2; }
+        .s3 { grid-area: s3; }
+        .s4 { grid-area: s4; }
+        .s5 { grid-area: s5; }
+        .s6 { grid-area: s6; }
+        .s7 { grid-area: s7; }
+        .s8 { grid-area: s8; }
+        .s9 { grid-area: s9; }
+
+        .flow-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        .flow-card-num {
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: #E60012;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .flow-card-title {
+            font-weight: bold;
+            color: #00599a;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .flow-card-desc {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        
+        /* 箭头通用样式 */
+        .flow-arrow {
+            position: absolute;
+            color: #cbd5e1;
+            font-size: 24px;
+            font-weight: bold;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .arrow-right { right: -25px; top: 50%; transform: translateY(-50%); }
+        .arrow-left { left: -25px; top: 50%; transform: translateY(-50%); }
+        .arrow-down { bottom: -30px; left: 50%; transform: translateX(-50%); }
+
+        /* 响应式调整 */
+        @media (max-width: 1024px) {
+            .implementation-grid { 
+                grid-template-columns: 1fr; 
+                grid-template-areas: "s1" "s2" "s3" "s4" "s5" "s6" "s7" "s8" "s9";
+                gap: 40px; 
+            }
+            .arrow-right, .arrow-left { display: none; }
+            .arrow-down { display: block !important; bottom: -35px !important; left: 50% !important; transform: translateX(-50%) !important; }
+            /* 在移动端，所有步骤后的箭头都改为向下 */
+            .flow-arrow { display: block !important; bottom: -35px !important; left: 50% !important; transform: translateX(-50%) !important; top: auto !important; right: auto !important; }
+        }
+    </style>
+</head>
+<body class="bg-white text-crcc-gray font-sans overflow-x-hidden">
+
+    <!-- 顶部 Logo 栏 -->
+    <header class="bg-white pt-4 pb-4">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo 组合 -->
+                <div class="flex items-center">
+                    <!-- CRCC 官方 Logo 图片 -->
+                    <div class="mr-4">
+                        <img src="logo.png" alt="中国铁建 Logo" class="h-14 w-auto object-contain" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex';">
+                        <!-- 备用方案：如果图片加载失败，显示文字 -->
+                        <div id="logo-fallback" class="hidden flex-col items-center">
+                            <div class="text-crcc-red font-black italic text-2xl tracking-tighter">CRCC</div>
+                            <div class="text-[10px] font-bold text-gray-700 mt-[-4px] tracking-[2px]">中国铁建</div>
+                        </div>
+                    </div>
+                    <!-- 文字 Logo -->
+                    <div class="">
+                        <div class="text-2xl font-bold tracking-tight text-gray-800" style="font-family: 'SimHei', sans-serif;">中铁建设集团有限公司</div>
+                        <div class="text-[10px] text-gray-500 font-medium uppercase tracking-tighter leading-none">CHINA RAILWAY CONSTRUCTION GROUP CO.,LTD.</div>
+                        <div class="text-sm text-crcc-red font-bold mt-1 tracking-widest">总承包公司 · 招采中心</div>
+                    </div>
+                </div>
+                <!-- 顶部工具栏 (可选) -->
+                <div class="hidden md:flex space-x-4 text-xs text-gray-500">
+                    <a href="http://ztjs.crcc.cn/" target="_blank" class="hover:text-crcc-blue">集团官网</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="http://www.ztjs.cn" target="_blank" class="hover:text-crcc-blue">内部网群</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主导航条 (蓝色背景) -->
+    <nav class="sticky top-0 z-50 bg-crcc-blue text-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-14">
+                <!-- PC 导航 -->
+                <div class="hidden lg:flex h-full text-base font-medium">
+                    <a href="#home" class="nav-link bg-white/10">首页</a>
+                    <a href="#org" class="nav-link">组织建设</a>
+                    <a href="#system" class="nav-link">制度建设</a>
+                    <a href="#workflow" class="nav-link">工作流程</a>
+                    <a href="#details" class="nav-link">实施细则</a>
+                    <a href="#templates" class="nav-link">附件模板</a>
+                    <a href="#focus" class="nav-link">工作重心</a>
+                </div>
+
+                <!-- 手机菜单按钮 -->
+                <button id="mobile-menu-btn" class="lg:hidden p-2 text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-crcc-blue border-t border-white/10 px-4 py-4 space-y-2">
+            <a href="#home" class="block py-2 hover:text-white/80">首页</a>
+            <a href="#org" class="block py-2 hover:text-white/80">组织建设</a>
+            <a href="#system" class="block py-2 hover:text-white/80">制度建设</a>
+            <a href="#workflow" class="block py-2 hover:text-white/80">工作流程</a>
+            <a href="#details" class="block py-2 hover:text-white/80">实施细则</a>
+            <a href="#templates" class="block py-2 hover:text-white/80">附件模板</a>
+            <a href="#focus" class="block py-2 hover:text-white/80">工作重心</a>
+        </div>
+    </nav>
+
+    <!-- 首页/Hero Section -->
+    <section id="home">
+        <div class="relative h-[450px] md:h-[550px] bg-gray-200 flex items-center overflow-hidden">
+            <!-- 背景图 (模拟官网风格) -->
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent z-10"></div>
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000" alt="Construction background" class="w-full h-full object-cover">
+            </div>
+            
+            <div class="container mx-auto px-4 relative z-20 text-white">
+                <div class="max-w-3xl">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6 leading-tight drop-shadow-lg">
+                        <span class="text-yellow-400">规范招采流程</span> · 强化阳光采购
+                    </h2>
+                    <h3 class="text-xl md:text-2xl font-medium mb-10 opacity-95 tracking-wide drop-shadow-md">
+                        致力于打造品质卓越的招采服务体系
+                    </h3>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#workflow" class="bg-crcc-blue hover:bg-blue-700 text-white px-10 py-3 rounded-sm font-bold transition duration-300 text-center shadow-lg">
+                            了解工作流程
+                        </a>
+                        <a href="#system" class="bg-white/20 hover:bg-white/30 backdrop-blur-md text-white border border-white/50 px-10 py-3 rounded-sm font-bold transition duration-300 text-center shadow-lg">
+                            查看制度建设
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 轮播指示器 (模拟官网) -->
+        </div>
+    </section>
+
+    <!-- 组织建设 -->
+    <section id="org" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-crcc-blue mb-12 section-title">组织建设</h2>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-lg leading-relaxed">
+                        中铁建设集团总承包公司招采中心成立于 <span class="font-bold text-crcc-red">2026年2月4日</span>，是公司为进一步加强招标采购规范化管理、强化工程量精算能力而设立的职能部门。
+                    </p>
+                    <div class="bg-crcc-light-gray p-6 border-l-4 border-crcc-blue">
+                        <h4 class="font-bold mb-4 text-crcc-blue">岗位配置情况：</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>经理 1 名 / 副经理 2 名</li>
+                            <li>招采量控岗 13 名（现到岗 11 名）</li>
+                            <li>负责全过程招标采购与工程量精算审核</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-6 bg-crcc-blue text-white rounded shadow-lg text-center transition-transform hover:scale-105">
+                        <div class="text-4xl font-bold mb-2">1</div>
+                        <div class="text-sm opacity-80 uppercase tracking-widest">经理</div>
+                    </div>
+                    <div class="p-6 bg-crcc-red text-white rounded shadow-lg text-center transition-transform hover:scale-105">
+                        <div class="text-4xl font-bold mb-2">2</div>
+                        <div class="text-sm opacity-80 uppercase tracking-widest">副经理</div>
+                    </div>
+                    <div class="p-6 bg-gray-700 text-white rounded shadow-lg text-center col-span-2 transition-transform hover:scale-105">
+                        <div class="text-4xl font-bold mb-2">13 <span class="text-lg font-normal text-gray-300">/ 11在岗</span></div>
+                        <div class="text-sm opacity-80 uppercase tracking-widest">招采量控岗</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 制度建设 -->
+    <section id="system" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-crcc-blue mb-12 section-title text-center lg:text-left">制度建设</h2>
+            
+            <div class="grid lg:grid-cols-2 gap-10">
+                <!-- 制定依据与范围 -->
+                <div class="space-y-8">
+                    <div class="bg-white p-6 shadow-md rounded-sm border-t-4 border-crcc-red">
+                        <h4 class="text-xl font-bold text-crcc-blue mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-crcc-red" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 4.804A7.994 7.994 0 0111 5c1.47 0 2.842.398 4 1.085v8.114c-1.158-.687-2.53-.1.085-4-1.085a7.994 7.994 0 01-2-1.804V4.804z"></path>
+                            </svg>
+                            制定依据
+                        </h4>
+                        <ul class="list-none space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <span class="text-crcc-red mr-2 font-bold">●</span>
+                                集团公司 2026 年 62 号文
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-crcc-red mr-2 font-bold">●</span>
+                                集团公司 2026 年 63 号文
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 shadow-md rounded-sm border-t-4 border-crcc-blue">
+                        <h4 class="text-xl font-bold text-crcc-blue mb-4 flex items-center">
+                            <svg class="w-6 h-6 mr-2 text-crcc-blue" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path>
+                            </svg>
+                            适用范围与门槛
+                        </h4>
+                        <div class="space-y-4">
+                            <p class="text-sm text-gray-500 italic">适用于总包公司及下属单位，以下门槛需纳入招采：</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div class="p-4 bg-crcc-light-gray text-center rounded">
+                                    <div class="text-crcc-red font-bold text-lg">≥10万</div>
+                                    <div class="text-xs">劳务/专业分包</div>
+                                </div>
+                                <div class="p-4 bg-crcc-light-gray text-center rounded">
+                                    <div class="text-crcc-red font-bold text-lg">≥5万</div>
+                                    <div class="text-xs">物资采购</div>
+                                </div>
+                                <div class="p-4 bg-crcc-light-gray text-center rounded">
+                                    <div class="text-crcc-red font-bold text-lg">≥10万</div>
+                                    <div class="text-xs">其他类别</div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-red-500 mt-2">* 排除涉密、海外、垄断行业等特殊情况</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 职能边界表格 -->
+                <div class="bg-white p-6 shadow-md rounded-sm overflow-x-auto border-t-4 border-gray-400">
+                    <h4 class="text-xl font-bold text-crcc-blue mb-6">三方权责边界</h4>
+                    <table class="w-full text-sm text-left border-collapse">
+                        <thead>
+                            <tr class="bg-crcc-blue text-white">
+                                <th class="p-3 border">责任主体</th>
+                                <th class="p-3 border">核心职能</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr>
+                                <td class="p-3 border font-bold bg-gray-50">招采中心</td>
+                                <td class="p-3 border leading-relaxed">制定标准规范、全过程合规监管、核心项目招采实施、量控复核。</td>
+                            </tr>
+                            <tr class="bg-white">
+                                <td class="p-3 border font-bold bg-gray-50">经济管理部</td>
+                                <td class="p-3 border leading-relaxed">合同法律风险控制、成本预算审批、最终结算管理。</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 border font-bold bg-gray-50">项目经理部</td>
+                                <td class="p-3 border leading-relaxed">提报真实需求、参与技术标评审、现场收货验收、一票否决权行使。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 工作流程 -->
+    <section id="workflow" class="py-20 bg-white">
+        <div class="container mx-auto px-4 text-center lg:text-left">
+            <h2 class="text-3xl font-bold text-crcc-blue mb-12 section-title">工作流程</h2>
+            
+            <!-- 分包业务流程 -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-semibold text-crcc-red mb-8 flex items-center justify-center lg:justify-start">
+                    <span class="w-8 h-8 bg-crcc-red text-white rounded-full flex items-center justify-center text-sm mr-3">01</span>
+                    分包业务流程 (三权分立)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+                    <!-- 流程步骤 1 -->
+                    <div class="flex flex-col items-center p-6 bg-crcc-light-gray rounded-lg relative z-10 border-b-4 border-crcc-blue">
+                        <div class="text-crcc-blue mb-4">
+                            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold mb-2">准备阶段</h4>
+                        <p class="text-xs text-gray-500">提报计划与技术要求</p>
+                    </div>
+                    <!-- 流程步骤 2 -->
+                    <div class="flex flex-col items-center p-6 bg-crcc-light-gray rounded-lg relative z-10 border-b-4 border-crcc-blue">
+                        <div class="text-crcc-blue mb-4">
+                            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold mb-2">初审阶段</h4>
+                        <p class="text-xs text-gray-500">资质与资信审核</p>
+                    </div>
+                    <!-- 流程步骤 3 -->
+                    <div class="flex flex-col items-center p-6 bg-crcc-light-gray rounded-lg relative z-10 border-b-4 border-crcc-blue">
+                        <div class="text-crcc-blue mb-4">
+                            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold mb-2">实施阶段</h4>
+                        <p class="text-xs text-gray-500">公开投标、现场评审</p>
+                    </div>
+                    <!-- 流程步骤 4 -->
+                    <div class="flex flex-col items-center p-6 bg-crcc-blue text-white rounded-lg relative z-10">
+                        <div class="text-white mb-4">
+                            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold mb-2">定标阶段</h4>
+                        <p class="text-xs opacity-80">最终评审与中标公示</p>
+                    </div>
+                </div>
+                <div class="mt-6 p-4 bg-red-50 border-l-4 border-crcc-red text-sm text-crcc-red italic">
+                    * 项目部拥有一票否决权，确保项目管理实效。
+                </div>
+            </div>
+
+            <!-- 物资业务流程 -->
+            <div>
+                <h3 class="text-2xl font-semibold text-crcc-blue mb-8 flex items-center justify-center lg:justify-start">
+                    <span class="w-8 h-8 bg-crcc-blue text-white rounded-full flex items-center justify-center text-sm mr-3">02</span>
+                    物资业务流程
+                </h3>
+                <div class="flex flex-wrap gap-4 items-center justify-center lg:justify-start">
+                    <div class="px-4 py-2 border border-gray-300 rounded shadow-sm bg-white">调研计划</div>
+                    <svg class="w-4 h-4 text-gray-400 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7"></path></svg>
+                    <div class="px-4 py-2 border border-gray-300 rounded shadow-sm bg-white">文件审查</div>
+                    <svg class="w-4 h-4 text-gray-400 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7"></path></svg>
+                    <div class="px-4 py-2 border border-crcc-red text-crcc-red font-bold rounded shadow-sm bg-white"><a href="https://www.crccep.cn/homeIndex" target="_blank">铁建云链采购</a></div>
+                    <svg class="w-4 h-4 text-gray-400 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7"></path></svg>
+                    <div class="px-4 py-2 border border-gray-300 rounded shadow-sm bg-white">小组定标</div>
+                    <svg class="w-4 h-4 text-gray-400 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7"></path></svg>
+                    <div class="px-4 py-2 border border-gray-300 rounded shadow-sm bg-white">合同评审</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 实施细则 -->
+    <section id="details" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-crcc-blue mb-12 section-title">实施细则</h2>
+            
+            <div class="implementation-grid">
+                <!-- Row 1: 1 -> 2 -> 3 -->
+                <div class="flow-card s1">
+                    <div class="flow-card-num">1</div>
+                    <div class="flow-card-title">采购计划</div>
+                    <div class="flow-card-desc">完整性；及时性；动态性；前瞻性</div>
+                    <div class="flow-arrow arrow-right">→</div>
+                </div>
+                <div class="flow-card s2">
+                    <div class="flow-card-num">2</div>
+                    <div class="flow-card-title">发布公告/邀请</div>
+                    <div class="flow-card-desc">招采中心云链；项目部集团招标系统</div>
+                    <div class="flow-arrow arrow-right">→</div>
+                </div>
+                <div class="flow-card s3">
+                    <div class="flow-card-num">3</div>
+                    <div class="flow-card-title">缴纳保证金</div>
+                    <div class="flow-card-desc">按需缴纳：劳务5%；专业分包10%</div>
+                    <div class="flow-arrow arrow-down">↓</div>
+                </div>
+
+                <!-- Row 2: 6 <- 5 <- 4 -->
+                <div class="flow-card s4">
+                    <div class="flow-card-num">4</div>
+                    <div class="flow-card-title">编制采购文件</div>
+                    <div class="flow-card-desc">项目编制并上报招采中心初审、发放</div>
+                    <div class="flow-arrow arrow-left">←</div>
+                </div>
+                <div class="flow-card s5">
+                    <div class="flow-card-num">5</div>
+                    <div class="flow-card-title">接受投标文件</div>
+                    <div class="flow-card-desc">标书邮寄到公司，接收时间以快递单号为准</div>
+                    <div class="flow-arrow arrow-left">←</div>
+                </div>
+                <div class="flow-card s6">
+                    <div class="flow-card-num">6</div>
+                    <div class="flow-card-title">开标、清标</div>
+                    <div class="flow-card-desc">招采中心负责开标、清标、出具响应价</div>
+                    <div class="flow-arrow arrow-down">↓</div>
+                </div>
+
+                <!-- Row 3: 7 -> 8 -> 9 -->
+                <div class="flow-card s7">
+                    <div class="flow-card-num">7</div>
+                    <div class="flow-card-title">评标、定标</div>
+                    <div class="flow-card-desc">合理低价：三重一大；综合评分：评标小组定标</div>
+                    <div class="flow-arrow arrow-right">→</div>
+                </div>
+                <div class="flow-card s8">
+                    <div class="flow-card-num">8</div>
+                    <div class="flow-card-title">发出中标通知</div>
+                    <div class="flow-card-desc">项目部发出中标通知书；物资走云链</div>
+                    <div class="flow-arrow arrow-right">→</div>
+                </div>
+                <div class="flow-card s9">
+                    <div class="flow-card-num">9</div>
+                    <div class="flow-card-title">资料留存</div>
+                    <div class="flow-card-desc">整理采购资料，副本留存公司，正本邮寄项目</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 附件模板与工具 -->
+    <section id="templates" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-crcc-blue mb-12 section-title">附件模板与工具 (共14份)</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 1. 采购资源配置计划表 -->
+                <a href="files/1采购资源配置计划表.xls" download class="flex items-center p-4 bg-gray-50 border border-gray-200 rounded hover:bg-crcc-light-gray transition group shadow-sm">
+                    <div class="w-10 h-10 bg-green-100 text-green-600 rounded flex items-center justify-center mr-3 group-hover:bg-green-600 group-hover:text-white transition">
+                        <span class="text-xs font-bold">XLS</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h5 class="text-sm font-bold truncate">1 采购资源配置计划表</h5>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-crcc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </a>
+
+                <!-- 2. 控制价及收支分析表 -->
+                <a href="files/2 控制价及收支分析表 .xlsx" download class="flex items-center p-4 bg-gray-50 border border-gray-200 rounded hover:bg-crcc-light-gray transition group shadow-sm">
+                    <div class="w-10 h-10 bg-green-100 text-green-600 rounded flex items-center justify-center mr-3 group-hover:bg-green-600 group-hover:text-white transition">
+                        <span class="text-xs font-bold">XLSX</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h5 class="text-sm font-bold truncate">2 控制价及收支分析表</h5>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-crcc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </a>
+
+                <!-- 3. 采购文件检查表 -->
+                <a href="files/3 采购文件检查表.xlsx" download class="flex items-center p-4 bg-gray-50 border border-gray-200 rounded hover:bg-crcc-light-gray transition group shadow-sm">
+                    <div class="w-10 h-10 bg-green-100 text-green-600 rounded flex items-center justify-center mr-3 group-hover:bg-green-600 group-hover:text-white transition">
+                        <span class="text-xs font-bold">XLSX</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h5 class="text-sm font-bold truncate">3 采购文件检查表</h5>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-crcc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </a>
+
+                <!-- 4. 投标重要事项提示 -->
+                <a href="files/4 投标重要事项提示.docx" download class="flex items-center p-4 bg-gray-50 border border-gray-200 rounded hover:bg-crcc-light-gray transition group shadow-sm">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded flex items-center justify-center mr-3 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <span class="text-xs font-bold">DOCX</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h5 class="text-sm font-bold truncate">4 投标重要事项提示</h5>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-crcc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </a>
+
+                <!-- 5. 二次报价说明 -->
+                <a href="files/5 二次报价说明.docx" download class="flex items-center p-4 bg-gray-50 border border-gray-200 rounded hover:bg-crcc-light-gray transition group shadow-sm">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded flex items-center justify-center mr-3 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <span class="text-xs font-bold">DOCX</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h5 class="text-sm font-bold truncate">5 二次报价说明</h5>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-crcc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </a>
+
+                <!-- 6. 采购清单模板 -->
+                <a href="files/6 采购清单模板.xlsx" download class="flex items-center p-4 bg-gray-50 border border-gray-200 rounded hover:bg-crcc-light-gray transition group shadow-sm">
+                    <div class="w-10 h-10 bg-green-100 text-green-600 rounded flex items-center justify-center mr-3 group-hover:bg-green-600 group-hover:text-white transition">
+                        <span class="text-xs font-bold">XLSX</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h5 class="text-sm font-bold truncate">6 采购清单模板</h5>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-crcc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </a>
+
+                <!-- 7. 采购套表 -->
+                <a href="files/7 采购套表.xls" download class="flex items-center p-4 bg-gray-50 border border-gray-200 rounded hover:bg-crcc-light-gray transition group shadow-sm">
+                    <div class="w-10 h-10 bg-green-100 text-green-600 rounded flex items-center justify-center mr-3 group-hover:bg-green-600 group-hover:text-white transition">
+                        <span class="text-xs font-bold">XLS</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h5 class="text-sm font-bold truncate">7 采购套表</h5>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-crcc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </a>
+
+                <!-- 8. 清标报告 -->
+                <a href="files/8 清标报告.docx" download class="flex items-center p-4 bg-gray-50 border border-gray-200 rounded hover:bg-crcc-light-gray transition group shadow-sm">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded flex items-center justify-center mr-3 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <span class="text-xs font-bold">DOCX</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h5 class="text-sm font-bold truncate">8 清标报告</h5>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-crcc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </a>
+
+                <!-- 9. 市场询价调研表 -->
+                <a href="files/9 市场询价调研表.xlsx" download class="flex items-center p-4 bg-gray-50 border border-gray-200 rounded hover:bg-crcc-light-gray transition group shadow-sm">
+                    <div class="w-10 h-10 bg-green-100 text-green-600 rounded flex items-center justify-center mr-3 group-hover:bg-green-600 group-hover:text-white transition">
+                        <span class="text-xs font-bold">XLSX</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h5 class="text-sm font-bold truncate">9 市场询价调研表</h5>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-crcc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </a>
+
+                <!-- 10. 资格预审公告 -->
+                <a href="files/10 资格预审公告.docx" download class="flex items-center p-4 bg-gray-50 border border-gray-200 rounded hover:bg-crcc-light-gray transition group shadow-sm">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded flex items-center justify-center mr-3 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <span class="text-xs font-bold">DOCX</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h5 class="text-sm font-bold truncate">10 资格预审公告</h5>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-crcc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </a>
+
+                <!-- 11. 资格预审文件 -->
+                <a href="files/11 资格预审文件.doc" download class="flex items-center p-4 bg-gray-50 border border-gray-200 rounded hover:bg-crcc-light-gray transition group shadow-sm">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded flex items-center justify-center mr-3 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <span class="text-xs font-bold">DOC</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h5 class="text-sm font-bold truncate">11 资格预审文件</h5>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-crcc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </a>
+
+                <!-- 12. 竞标公告 -->
+                <a href="files/12 竞标公告.docx" download class="flex items-center p-4 bg-gray-50 border border-gray-200 rounded hover:bg-crcc-light-gray transition group shadow-sm">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded flex items-center justify-center mr-3 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <span class="text-xs font-bold">DOCX</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h5 class="text-sm font-bold truncate">12 竞标公告</h5>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-crcc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </a>
+
+                <!-- 13. 竞谈报告 -->
+                <a href="files/13 竞谈报告.docx" download class="flex items-center p-4 bg-gray-50 border border-gray-200 rounded hover:bg-crcc-light-gray transition group shadow-sm">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded flex items-center justify-center mr-3 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <span class="text-xs font-bold">DOCX</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h5 class="text-sm font-bold truncate">13 竞谈报告</h5>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-crcc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </a>
+
+                <!-- 14. 中标、未中标通知书 -->
+                <a href="files/14 中标、未中标通知书.docx" download class="flex items-center p-4 bg-gray-50 border border-gray-200 rounded hover:bg-crcc-light-gray transition group shadow-sm">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded flex items-center justify-center mr-3 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <span class="text-xs font-bold">DOCX</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h5 class="text-sm font-bold truncate">14 中标、未中标通知书</h5>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-crcc-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 工作重心 -->
+    <section id="focus" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-crcc-blue mb-12 section-title">工作重心</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div class="bg-white p-6 border-t-2 border-crcc-blue shadow-sm hover:shadow-md transition">
+                    <h5 class="font-bold text-crcc-blue mb-2">严审计划</h5>
+                    <p class="text-xs text-gray-600">强化招采计划的前瞻性与真实性审核。</p>
+                </div>
+                <div class="bg-white p-6 border-t-2 border-crcc-blue shadow-sm hover:shadow-md transition">
+                    <h5 class="font-bold text-crcc-blue mb-2">文件核验</h5>
+                    <p class="text-xs text-gray-600">加强招标文件的合规性与技术深度审查。</p>
+                </div>
+                <div class="bg-white p-6 border-t-2 border-crcc-blue shadow-sm hover:shadow-md transition">
+                    <h5 class="font-bold text-crcc-blue mb-2">公开开标</h5>
+                    <p class="text-xs text-gray-600">严格执行阳光操作，确保过程全程留痕。</p>
+                </div>
+                <div class="bg-white p-6 border-t-2 border-crcc-blue shadow-sm hover:shadow-md transition">
+                    <h5 class="font-bold text-crcc-blue mb-2">时间交圈</h5>
+                    <p class="text-xs text-gray-600">优化节点衔接，缩短招采周期，提升效率。</p>
+                </div>
+                <div class="bg-white p-6 border-t-2 border-crcc-blue shadow-sm hover:shadow-md transition">
+                    <h5 class="font-bold text-crcc-blue mb-2">合同报备</h5>
+                    <p class="text-xs text-gray-600">规范合同签署与归档，闭环管理流程。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-crcc-gray text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-8 border-b border-gray-700 pb-8 mb-8 text-center md:text-left justify-items-center md:justify-items-start">
+                <div>
+                    <h5 class="text-lg font-bold mb-6">快速链接</h5>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="https://www.crccep.cn/homeIndex" target="_blank" class="hover:text-white transition">铁建云链平台</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-lg font-bold mb-6">联系我们</h5>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-center justify-center md:justify-start">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            北京市石景山区中铁创业大厦A座1004
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center text-xs text-gray-500">
+                <p>© 2026 中铁建设集团总承包公司招采中心 版权所有 </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 手机端菜单切换
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 点击导航项后自动关闭菜单
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 点击导航显示对应部分
+        const sections = document.querySelectorAll('section');
+        const pcNavLinks = document.querySelectorAll('.nav-link');
+        const mobileLinks = document.querySelectorAll('#mobile-menu a');
+
+        function showSection(sectionId) {
+            sections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        // PC 导航点击
+        pcNavLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                
+                pcNavLinks.forEach(l => l.classList.remove('bg-white/10'));
+                link.classList.add('bg-white/10');
+                
+                showSection(targetId);
+            });
+        });
+
+        // 移动端导航点击
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                mobileMenu.classList.add('hidden');
+                showSection(targetId);
+            });
+        });
+
+        // 初始化：只显示首页
+        showSection('home');
+    </script>
+</body>
+</html>
